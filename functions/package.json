@@ -2,10 +2,10 @@
   "name": "function-horizon",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "build": "node lint && rm -rf ./lib && tsc",
-    "serve": "node build && firebase emulators --only functions",
-    "shell": "node build && firebase functions:shell",
-    "start": "node shell",
+    "build": "npm run lint && rm -rf ./lib && tsc",
+    "serve": "npm run build && firebase emulators --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "lint": "eslint --fix -c ./.eslintrc.json './**/*.ts'"
