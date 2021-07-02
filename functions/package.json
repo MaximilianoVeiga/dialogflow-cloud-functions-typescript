@@ -2,11 +2,13 @@
   "name": "function-horizon",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "serve": "firebase emulators:start --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
+    "build": "node lint && rm -rf ./lib && tsc",
+    "serve": "node build && firebase emulators --only functions",
+    "shell": "node build && firebase functions:shell",
+    "start": "node shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "lint": "eslint --fix -c ./.eslintrc.json './**/*.ts'"
   },
   "engines": {
     "node": "12"
@@ -21,8 +23,16 @@
     "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
+    "@types/node": "^15.14.0",
+    "@types/cors": "2.8.6",
+    "@types/express": "4.17.1",
+    "@typescript-eslint/eslint-plugin": "2.0.0",
+    "@typescript-eslint/parser": "2.0.0",
+    "eslint-plugin-node": "9.1.0",
     "eslint": "^7.15.0",
-    "firebase-functions-test": "^0.2.0"
+    "firebase-functions-test": "^0.2.0",
+    "ts-node": "8.3.0",
+    "typescript": "3.5.3"
   },
   "private": true
 }

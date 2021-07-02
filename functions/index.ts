@@ -1,9 +1,9 @@
 'use strict';
 
-const functions = require('firebase-functions');
-const { WebhookClient } = require('dialogflow-fulfillment-helper');
+import functions from 'firebase-functions';
+import { WebhookClient } from 'dialogflow-fulfillment-helper';
 
-const intents = require('./intents/index');
+import intents from './intents/index';
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     const agent = new WebhookClient({ request, response });
