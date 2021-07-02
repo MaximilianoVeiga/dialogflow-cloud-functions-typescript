@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": false,
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -10,6 +9,5 @@
     "target": "es2017"
   },
   "compileOnSave": true,
-  "exclude": ["node_modules"],
   "include": ["src"]
 }
