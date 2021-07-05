@@ -6,6 +6,7 @@
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
+    "dev": "nodemon",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "lint": "eslint --ext .js,.ts ."
@@ -33,6 +34,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.0",
     "firebase-functions-test": "^0.2.0",
+    "nodemon": "^2.0.9",
     "ts-node": "8.3.0",
     "typescript": "^3.8.0"
   },

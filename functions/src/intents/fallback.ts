@@ -9,4 +9,4 @@ let fallbackIntents = {
   },
 };
 
-module.exports = fallbackIntents;
+export default fallbackIntents;
