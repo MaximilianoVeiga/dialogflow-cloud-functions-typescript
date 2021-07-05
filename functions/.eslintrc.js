@@ -17,11 +17,14 @@ module.exports = {
     project: ["tsconfig.json", "tsconfig.dev.json"],
     sourceType: "module",
   },
-  ignorePatterns: [
-    "/lib/**/*", // Ignore built files.
-  ],
+  ignorePatterns: ["/lib/**/*"],
   plugins: ["@typescript-eslint", "import"],
   rules: {
-    quotes: ["error", "double"],
+    "quotes": ["error", "double"],
+    "linebreak-style": ["error", "windows"],
+    "max-line-length": [0],
+    "indent": ["error", 2],
+    "object-curly-spacing": "off",
+    "max-len": ["error", { "code": 130 }],
   },
 };

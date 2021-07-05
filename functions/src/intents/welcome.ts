@@ -3,17 +3,17 @@ import {
   setFollowupEvent,
 } from "../utils";
 
-let welcomeIntents = {
-  "Default Welcome Intent": (agent: any) => {
+const welcomeIntents = {
+  "Default Welcome Intent": (agent: any): void => {
     addMessage(agent, ["Sair", "Sobre"], "suggestion");
   },
-  "About Intent": (agent: any) => {
-    addMessage(agent, "Exemplo de mensagem", "message");
+  "About Intent": (agent: any): void => {
+    addMessage(agent, "Exemplo de mensagem!", "message");
   },
-  "End Conversation Intent": (agent: any) => {
-    addMessage(agent, "Exemplo de mensagem", "message");
+  "End Conversation Intent": (agent: any): void => {
+    addMessage(agent, "Exemplo de mensagem!", "message");
   },
-  "Question": (agent: any) => {
+  "Question": (agent: any): void => {
     setFollowupEvent(agent, "waiting_request");
   },
 };

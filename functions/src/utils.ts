@@ -8,7 +8,7 @@ import {
 
 require("dotenv").config();
 
-function setSuggestion(agent: any, title: string, suggestions: any[]) {
+function setSuggestion(agent: any, title: string, suggestions: any[]): void {
   const platform = agent.source;
 
   if (platform != null && platform != "GENESYS") {
@@ -54,14 +54,17 @@ function setSuggestion(agent: any, title: string, suggestions: any[]) {
   }
 }
 
-function formatGoogleAssistantToGenesysPayload(agent: any) {
+function formatGoogleAssistantToGenesysPayload(agent: any): any {
   if (agent.source === "GENESYS") {
     const googleAssistantPayload: any[] = [];
 
     agent.request_.body.queryResult.fulfillmentMessages.map((item: any) => {
-        if(item?.platform === "ACTIONS_ON_GOOGLE" && item?.simpleResponses?.simpleResponses[0]?.ssml){
-          googleAssistantPayload.push(item);
-        }
+      if (
+        item?.platform === "ACTIONS_ON_GOOGLE" &&
+        item?.simpleResponses?.simpleResponses[0]?.ssml
+      ) {
+        googleAssistantPayload.push(item);
+      }
     });
 
     let modifiedPayload = {
@@ -71,7 +74,7 @@ function formatGoogleAssistantToGenesysPayload(agent: any) {
         ],
       },
     };
-    
+
     agent.request_.body.queryResult.fulfillmentMessages = [];
     agent.request_.body.queryResult.fulfillmentMessages.push(modifiedPayload);
 
@@ -91,11 +94,11 @@ function formatGoogleAssistantToGenesysPayload(agent: any) {
   return agent;
 }
 
-function setFollowupEvent(agent: any, event: any) {
+function setFollowupEvent(agent: any, event: any): void {
   agent.setFollowupEvent(event);
 }
 
-function addMessage(agent: any, message: string | any[], type: string) {
+function addMessage(agent: any, message: string | any[], type: string): any {
   let modifiedPayload;
   // console.log(agent.request_.body.queryResult.fulfillmentMessages);
   if (type === "message" || !type) {
@@ -133,7 +136,14 @@ function addMessage(agent: any, message: string | any[], type: string) {
   return agent;
 }
 
-function setCard(agent: any, title: string, subtitle: string, cardText: string, cardURL: string, cardImage: string) {
+function setCard(
+  agent: any,
+  title: string,
+  subtitle: string,
+  cardText: string,
+  cardURL: string,
+  cardImage: string
+): void {
   const platform = agent.source;
 
   if (platform != null && platform != "GENESYS") {
@@ -175,7 +185,7 @@ function setCard(agent: any, title: string, subtitle: string, cardText: string, 
   }
 }
 
-function setResponse(agent: any, responses: any[]) {
+function setResponse(agent: any, responses: any[]): void {
   const platform = agent.source;
 
   responses.map((response) => {
@@ -189,7 +199,13 @@ function setResponse(agent: any, responses: any[]) {
   });
 }
 
-function setLink(agent: any, link: string, text: string) {
+/**
+ * Set an link rich payload.
+ * @param {any} agent Agent.
+ * @param {string} link Link.
+ * @param {string} text Text.
+ */
+function setLink(agent: any, link: string, text: string): void {
   const platform = agent.source;
 
   if (platform != null) {
@@ -220,7 +236,12 @@ function setLink(agent: any, link: string, text: string) {
   }
 }
 
-function setImage(agent: any, imageUrl: string) {
+/**
+ * Set an image rich payload.
+ * @param {any} agent Agent.
+ * @param {string} imageUrl Image url.
+ */
+function setImage(agent: any, imageUrl: string): void {
   const platform = agent.source;
 
   if (platform != null) {
@@ -229,7 +250,13 @@ function setImage(agent: any, imageUrl: string) {
   }
 }
 
-function findArray(response: any[], title: string) {
+/**
+ * Search responses array by title.
+ * @param {any[]} response Array of responses.
+ * @param {string} title Intent to be searched for.
+ * @return {response} Returns the intent if found.
+ */
+function findArray(response: any[], title: string): any {
   return response.find((element) => element[`${title}`])[`${title}`];
 }
 
@@ -242,5 +269,5 @@ export {
   findArray,
   formatGoogleAssistantToGenesysPayload,
   addMessage,
-  setFollowupEvent
+  setFollowupEvent,
 };

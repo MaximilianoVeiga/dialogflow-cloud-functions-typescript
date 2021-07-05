@@ -1,11 +1,11 @@
 import { setResponse, findArray, formatGoogleAssistantToGenesysPayload } from "../utils";
 import fallbackResponses from "../responses/fallback";
 
-let fallbackIntents = {
-  "Default Fallback Intent": (agent: any) => {
+const fallbackIntents = {
+  "Default Fallback Intent": (agent: any): void => {
     formatGoogleAssistantToGenesysPayload(agent);
 
-    setResponse(agent, findArray(fallbackResponses, 'Default Fallback Intent'));
+    setResponse(agent, findArray(fallbackResponses, "Default Fallback Intent"));
   },
 };
 
