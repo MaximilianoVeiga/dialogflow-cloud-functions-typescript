@@ -6,8 +6,16 @@ import {
   Payload,
 } from "dialogflow-fulfillment-helper";
 
-require("dotenv").config();
+import * as dotenv from "dotenv";
 
+dotenv.config();
+
+/**
+ * Set a link rich payload.
+ * @param {any} agent Agent.
+ * @param {string} title The title.
+ * @param {string} suggestions Text.
+ */
 function setSuggestion(agent: any, title: string, suggestions: any[]): void {
   const platform = agent.source;
 
@@ -24,7 +32,7 @@ function setSuggestion(agent: any, title: string, suggestions: any[]): void {
 
     agent.add(currentSuggestions);
   } else {
-    let chipsMap = [];
+    const chipsMap = [];
 
     for (let index = 0; index < suggestions.length; index++) {
       chipsMap[index] = {
@@ -54,6 +62,11 @@ function setSuggestion(agent: any, title: string, suggestions: any[]): void {
   }
 }
 
+/**
+ * Converts the payload from Google Assistant's into Genesys'.
+ * @param {any} agent Agent.
+ * @return {any} Returns the agent.
+ */
 function formatGoogleAssistantToGenesysPayload(agent: any): any {
   if (agent.source === "GENESYS") {
     const googleAssistantPayload: any[] = [];
@@ -67,7 +80,7 @@ function formatGoogleAssistantToGenesysPayload(agent: any): any {
       }
     });
 
-    let modifiedPayload = {
+    const modifiedPayload = {
       text: {
         text: [
           googleAssistantPayload[0].simpleResponses.simpleResponses[0].ssml,
@@ -94,10 +107,22 @@ function formatGoogleAssistantToGenesysPayload(agent: any): any {
   return agent;
 }
 
+/**
+ * Sets the followup event.
+ * @param {any} agent Agent.
+ * @param {string} event Event.
+ */
 function setFollowupEvent(agent: any, event: any): void {
   agent.setFollowupEvent(event);
 }
 
+/**
+ * Adds a message or a message array.
+ * @param {any} agent Agent.
+ * @param {string} message Message.
+ * @param {string} type Type.
+ * @return {any} Returns the agent.
+ */
 function addMessage(agent: any, message: string | any[], type: string): any {
   let modifiedPayload;
   // console.log(agent.request_.body.queryResult.fulfillmentMessages);
@@ -105,7 +130,7 @@ function addMessage(agent: any, message: string | any[], type: string): any {
     modifiedPayload = { text: { text: [message] } };
     agent.responseMessages_.push(new Text(message));
   } else if (type === "suggestion" || !type) {
-    let chipsMap = [];
+    const chipsMap = [];
 
     for (let index = 0; index < message.length; index++) {
       chipsMap[index] = {
@@ -136,6 +161,15 @@ function addMessage(agent: any, message: string | any[], type: string): any {
   return agent;
 }
 
+/**
+ * Sets the card.
+ * @param {any} agent Agent.
+ * @param {string} title Title.
+ * @param {string} subtitle Subtitle.
+ * @param {string} cardText Card's text.
+ * @param {string} cardURL Card's URL.
+ * @param {string} cardImage Card's image.
+ */
 function setCard(
   agent: any,
   title: string,
@@ -185,6 +219,11 @@ function setCard(
   }
 }
 
+/**
+ * Sets the response.
+ * @param {any} agent Agent.
+ * @param {string} responses Array of responses.
+ */
 function setResponse(agent: any, responses: any[]): void {
   const platform = agent.source;
 
