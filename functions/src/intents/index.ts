@@ -1,12 +1,12 @@
-let intents = {
+const intents = {
   welcome: require("./welcome"),
   fallback: require("./fallback"),
 };
 
-let allIntents = new Map();
+const allIntents = new Map();
 
-for (let [, intentValue] of Object.entries(intents)) {
-  for (let [key, value] of Object.entries(intentValue)) {
+for (const [, intentValue] of Object.entries(intents)) {
+  for (const [key, value] of Object.entries(intentValue)) {
     allIntents.set(key, value);
   }
 }
